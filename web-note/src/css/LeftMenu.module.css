@@ -1,0 +1,16 @@
+.leftMenu{
+    height: calc(100vh - 3rem);
+    width: 6rem;
+    background-color: green;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.menuItem{
+    color: black;
+}
+.menuItem:hover{
+    color: darkgray;
+    text-decoration: none;
+}

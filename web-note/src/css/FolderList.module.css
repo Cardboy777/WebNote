@@ -1,0 +1,8 @@
+.folderList{
+    height: 3rem;
+    float: right;
+    width: calc(100vw - 6rem);
+    background-color: blue;
+    margin-top: -8px;
+    padding:0;
+}

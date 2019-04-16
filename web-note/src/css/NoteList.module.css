@@ -1,0 +1,13 @@
+.noteList{
+    background-color: purple;
+    width: 20rem;
+    height: calc(100vh - 6rem);
+    margin-left: 6rem;
+    float: left;
+}
+
+@media only screen and (max-width: 1200px) {
+    .noteList {
+        width: 25%;
+    }
+}
