@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WebNote from './App';
+import WebNote from './js/WebNote';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<WebNote />, document.getElementById('root'));
