@@ -1,0 +1,46 @@
+.fullscreen{
+    position: absolute;
+    left: 0;
+    top:0;
+    background-color: rgba(0,0,0,0.4);
+    color: black;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.menu{
+    margin-top: 8%;
+    text-align: left;
+    background-color: white;
+    width: 600px;
+    display: inline-block;
+}
+.menuTitle{
+    float: left;
+    font-weight: 1000;
+    font-size: 2rem;
+    padding: 10px 0 0 10px;
+}
+
+.exitButton{
+    float: right;
+    margin-right: 5px;
+    padding: 0;
+}
+
+.inputLable{
+    margin: 3.8rem 0 0 1rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    display: default;
+}
+.folderInput{
+    width: calc(600px - 2rem);
+    margin: 1rem;
+    padding: 0 0.5rem 0 0.5rem;
+}
+.submitButton{
+    float: right;
+    margin: -10px 0 0 0;
+    padding: 0 20px 5px 0;
+}

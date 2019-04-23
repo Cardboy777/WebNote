@@ -105,7 +105,7 @@ class WebNote extends Component {
           <div>
             {this.isLoggedIn() ?
             <div>
-              <NotePage/>
+              <NotePage user={this.state.uAuth} data={this.state.uData}/>
             </div>
             :
             <div>

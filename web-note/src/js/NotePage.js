@@ -10,7 +10,7 @@ export default class NotePage extends Component {
       <div>
         <Header/>
         <LeftMenu/>
-        <Notes/>
+        <Notes {...this.props} />
       </div>
     )
   }

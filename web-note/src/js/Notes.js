@@ -4,17 +4,25 @@ import NoteList from './NoteList'
 import NoteEdit from './NoteEdit'
 
 export default class Notes extends Component {
+  constructor(){
+    super();
+    this.state={
+      selectedFolder: null,
+      selectedNote: null
+    }
+  }
+
   render() {
     const wrapperDiv={
-        maring: '0',
+        margin: '0',
         padding: '0'
     };
     
     return (
       <div style={wrapperDiv}>
-        <FolderList/>
-        <NoteList/>
-        <NoteEdit/>
+        <FolderList {...this.props}/>
+        <NoteList {...this.props} folderI={this.state.selectedFolder}/>
+        <NoteEdit {...this.props} folderI={this.state.selectedFolder} noteI={this.state.selectedNote}/>
       </div>
     )
   }

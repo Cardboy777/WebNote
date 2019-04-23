@@ -4,6 +4,7 @@
     height: calc(100vh - 6rem);
     margin-left: 6rem;
     float: left;
+    overflow: auto;
 }
 
 @media only screen and (max-width: 1200px) {

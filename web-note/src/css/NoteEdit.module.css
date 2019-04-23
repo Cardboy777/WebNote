@@ -2,7 +2,13 @@
     width: calc(100vw - 6rem - 20rem);
     height: calc(100vh - 6rem);
     float: left;
-    background-color: dodgerblue;
+    background-color: rgb(243, 243, 243);
+    overflow: auto;
+    padding: 1rem;
+    color: black;
+}
+
+.noteArea{
 }
 
 @media only screen and (max-width: 1200px) {
