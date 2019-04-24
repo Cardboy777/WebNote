@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NewFolderMenu from './NewFolderMenu'
+import FolderTab from './FolderTab'
 import style from '../css/FolderList.module.css'
 
 export default class FolderList extends Component {
@@ -11,7 +12,6 @@ export default class FolderList extends Component {
     }
   }
 
-
   newFolder(){
     this.setState({
       showNewFolderMenu : !this.state.showNewFolderMenu
@@ -21,12 +21,16 @@ export default class FolderList extends Component {
   render() {
     return (
       <div className={style.folderList}>
-        <button className="btn btn-primary" onClick={this.newFolder}>+</button>
         {this.state.showNewFolderMenu === true ? 
             <NewFolderMenu {...this.props} closeMenu={this.newFolder}/>
           :
-            <React.Fragment/>
+          <React.Fragment>
+            {this.props.data.folders.map((i)=>
+              <FolderTab key={i.name} folder={i} setFolder={this.props.setFolder} isSelected={i === this.props.folder}/>
+            )}
+          </React.Fragment>
         }
+        <button className="btn btn-primary" onClick={this.newFolder}>+</button>
       </div>
     )
   }

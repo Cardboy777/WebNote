@@ -1,0 +1,13 @@
+.tab{
+    float: left;
+    height: 100%;
+    max-width: 500px;
+    background-color: red;
+    padding: 0 0.8rem 0 0.8rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.tab.isSelected{
+    background-color: rgb(201, 0, 167);
+}

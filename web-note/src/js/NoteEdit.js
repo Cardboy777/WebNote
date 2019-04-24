@@ -15,9 +15,9 @@ export default class NoteEdit extends Component {
     }
 
     componentDidMount(){
-        if(this.props.noteI !== null){
+        if(this.props.note !== null){
             this.setState({
-                editorState: this.props.data.folders[this.props.folderI].notes[this.props.noteI].content,
+                editorState: this.props.note.content,
                 noteData: this.props.data.folders,
             })
         }
@@ -25,7 +25,7 @@ export default class NoteEdit extends Component {
 
     onChange(value){
         let newData = this.state.noteData
-        newData[this.props.folderI].notes[this.props.noteI].content = value;
+        this.props.note.content = value;
         this.setState({
             content : value,
             noteData : newData,

@@ -11,19 +11,21 @@ export default class NewFolderMenu extends Component {
 
     createFolder(){
         let db = firebase.firestore();
-        let folderName = document.getElementById('folderInput').value
-        db.collection("userData").doc(this.props.user.uid).set({
-            folders: {
-                [folderName] : {
-                    name: folderName
-                }
+        let folderName = document.getElementById("folderName").value
+        console.log(folderName)
+
+        let newFolder={
+            name: folderName,
+            contents: []
+        }
+        db.collection("userData").doc(this.props.user.uid).update(
+            {
+                folders: firebase.firestore.FieldValue.arrayUnion(newFolder)
             }
-        })
+        )
         .then((res)=>{
-            console.log(res)
             console.log('Folder Created')
         }).catch((err)=>{
-            console.log(err)
             console.log('Error')
         })
 
@@ -42,9 +44,9 @@ export default class NewFolderMenu extends Component {
                 <h2 className={style.inputLable}>
                     Folder Name:
                 </h2>
-                <input className={style.folderInput} placeholder='Enter Folder Name Here...'/>
+                <input id='folderName' className={style.folderInput} placeholder='Enter Folder Name Here...'/>
                 <div className={style.submitButton}>
-                    <button id='folderInput' className="btn btn-primary " onClick={this.createFolder}>Create</button>
+                    <button className="btn btn-primary " onClick={this.createFolder}>Create</button>
                 </div>
             </div>
         </div>

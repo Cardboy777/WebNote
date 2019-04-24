@@ -10,6 +10,20 @@ export default class Notes extends Component {
       selectedFolder: null,
       selectedNote: null
     }
+    this.setFolder = this.setFolder.bind(this)
+    this.setNote = this.setNote.bind(this)
+  }
+
+  setFolder(folder){
+    this.setState({
+      selectedFolder : folder,
+      selectedNote: null
+    })
+  }
+  setNote(note){
+    this.setState({
+      selectedNote : note
+    })
   }
 
   render() {
@@ -20,9 +34,9 @@ export default class Notes extends Component {
     
     return (
       <div style={wrapperDiv}>
-        <FolderList {...this.props}/>
-        <NoteList {...this.props} folderI={this.state.selectedFolder}/>
-        <NoteEdit {...this.props} folderI={this.state.selectedFolder} noteI={this.state.selectedNote}/>
+        <FolderList {...this.props} setFolder={this.setFolder} folder={this.state.selectedFolder}/>
+        <NoteList {...this.props} folder={this.state.selectedFolder} setNote={this.setNote}/>
+        <NoteEdit {...this.props} folder={this.state.selectedFolder} note={this.state.selectedNote}/>
       </div>
     )
   }
