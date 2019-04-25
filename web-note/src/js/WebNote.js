@@ -110,12 +110,16 @@ class WebNote extends Component {
         }
       })
       .catch( (error) => {
+        let newData= {
+          folders: [],
+          uid: user.uid
+        }
         this.setState({
           uAuth : user,
-          uData : null,
           isAuthenticating: false
         });
-          console.log("Error getting User Data:\n" + error);
+          console.log("Error getting User Data from firebase:\n" + error);
+          this.updateData(newData);
       });
   }
 

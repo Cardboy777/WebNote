@@ -3,6 +3,8 @@ import FolderList from './FolderList'
 import NoteList from './NoteList'
 import NoteEdit from './NoteEdit'
 
+import noteEditStyle from '../css/NoteEdit.module.css'
+
 export default class Notes extends Component {
   constructor(){
     super();
@@ -38,7 +40,12 @@ export default class Notes extends Component {
       <div style={wrapperDiv}>
         <FolderList {...this.props} setFolder={this.setFolder} folder={this.state.selectedFolder}/>
         <NoteList {...this.props} folder={this.state.selectedFolder} setNote={this.setNote}/>
-        <NoteEdit {...this.props} folder={this.state.selectedFolder} note={this.state.selectedNote}/>
+        {this.state.selectedNote !== null ?
+          <NoteEdit {...this.props} folder={this.state.selectedFolder} note={this.state.selectedNote}/>
+          :
+          <div className={noteEditStyle.noteEdit}>Select Note to Edit</div>
+        }
+        
       </div>
     )
   }

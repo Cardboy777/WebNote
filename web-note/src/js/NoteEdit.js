@@ -16,10 +16,12 @@ export default class NoteEdit extends Component {
     }
 
     componentDidMount(){
+        console.log('Here')
         if(this.props.note !== null){
             this.setState({
                 editorContent: this.props.note.content
             })
+            document.getElementById('noteEditor').value = this.props.note.content
         }
     }
 
@@ -41,9 +43,7 @@ export default class NoteEdit extends Component {
         let data = this.props.data
         let folderI = data.folders.findIndex(this.findFolder)
         let noteI = data.folders[folderI].contents.findIndex(this.findNote)
-
         data.folders[folderI].contents[noteI].content= this.state.editorContent
-
         this.props.updateData(data)
     }
     findFolder(a){
@@ -57,14 +57,7 @@ export default class NoteEdit extends Component {
 
         return ( 
             <div className={ style.noteEdit }>
-                {this.props.folder !== null ?
-                    this.props.note !== null ?
-                        <textarea id="noteEditor" className={style.noteArea} placeholder="Start Typing!" onChange={this.onChange}>{this.state.content}</textarea>
-                    :
-                        <p>Select a Note to Edit</p>
-                :
-                <React.Fragment/>
-                }
+                <textarea id="noteEditor" className={style.noteArea} placeholder="Start Typing!" onChange={this.onChange}/>
             </div>
         )
     }
