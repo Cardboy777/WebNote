@@ -7,29 +7,21 @@ export default class NewFolderMenu extends Component {
         super(props);
         this.createFolder = this.createFolder.bind(this);
     }
-
-
+    //Creates new folder and updates database
     createFolder(){
-        let db = firebase.firestore();
         let folderName = document.getElementById("folderName").value
         console.log(folderName)
+        let data= this.props.data
 
         let newFolder={
             name: folderName,
-            contents: []
+            contents: [],
+            createdBy: this.props.user.uid,
+            visibleBy: this.props.user.uid
         }
-        db.collection("userData").doc(this.props.user.uid).update(
-            {
-                folders: firebase.firestore.FieldValue.arrayUnion(newFolder)
-            }
-        )
-        .then((res)=>{
-            console.log('Folder Created')
-        }).catch((err)=>{
-            console.log('Error')
-        })
+        data.folders.push(newFolder)
+        this.props.updateData(data)
 
-        
         this.props.closeMenu();
     }
 

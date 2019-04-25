@@ -7,13 +7,15 @@ import styles from '../css/WebNote.module.css'
 class WebNote extends Component {
   constructor(){
     super();
+    this.handleLoggedinUser = this.handleLoggedinUser.bind(this)
+    this.isLoggedIn = this.isLoggedIn.bind(this)
+    this.updateData = this.updateData.bind(this)
     this.state={
       uAuth: null,
       uData: null,
-      isAuthenticating: true
+      isAuthenticating: true,
+      updateData: this.updateData
     }
-    this.handleLoggedinUser = this.handleLoggedinUser.bind(this);
-    this.isLoggedIn = this.isLoggedIn.bind(this);
   }
 
   //Starts the process of authenticating the current user (checking if a user is logged in)
@@ -37,6 +39,23 @@ class WebNote extends Component {
         }
       });
     }
+  }
+
+  updateData(data){
+    let db= firebase.firestore()
+    localStorage.setItem('uData', data);
+
+    this.setState({
+      uData : data
+    })
+
+    db.collection("userData").doc(this.state.uAuth.uid).update({
+          folders: data.folders
+    }).then((res)=>{
+        console.log('Firebase Updated')
+    }).catch((err)=>{
+        console.log('Firebase Error')
+    })
   }
 
 	componentDidMount(){
@@ -78,9 +97,13 @@ class WebNote extends Component {
             isAuthenticating: false
           });
         } else {
+          let newData={
+            folders : [],
+            uid : user.uid
+          }
+          this.updateData(newData)
           this.setState({
             uAuth : user,
-            uData : null,
             isAuthenticating: false
           });
           console.log('No user data available for '+ this.state.uAuth.uid);
@@ -105,7 +128,7 @@ class WebNote extends Component {
           <div>
             {this.isLoggedIn() ?
             <div>
-              <NotePage user={this.state.uAuth} data={this.state.uData}/>
+              <NotePage user={this.state.uAuth} data={this.state.uData} updateData={this.updateData}/>
             </div>
             :
             <div>

@@ -6,29 +6,26 @@ export default class NoteEdit extends Component {
     constructor(props){
         super(props);
         this.state = {
-            editorState: null,
-            noteData: null,
+            editorContent: null,
             lastKeyPressTime: Date.now()
         }
-        this.onChange = this.onChange.bind(this);
-        this.saveChanges = this.saveChanges.bind(this);
+        this.onChange = this.onChange.bind(this)
+        this.saveChanges = this.saveChanges.bind(this)
+        this.findFolder=this.findFolder.bind(this)
+        this.findNote=this.findNote.bind(this)
     }
 
     componentDidMount(){
         if(this.props.note !== null){
             this.setState({
-                editorState: this.props.note.content,
-                noteData: this.props.data.folders,
+                editorContent: this.props.note.content
             })
         }
     }
 
-    onChange(value){
-        let newData = this.state.noteData
-        this.props.note.content = value;
+    onChange(e){
         this.setState({
-            content : value,
-            noteData : newData,
+            editorContent : e.target.value,
             lastKeyPressTime: Date.now()
         });
         //Auto-save after 1 second of no typing
@@ -41,23 +38,33 @@ export default class NoteEdit extends Component {
     }
     
     saveChanges(){
-        console.log("Saving Changes...")
-        firebase.firestore().collection("userData").doc(this.props.user.uid).update({
-            folders: this.state.noteData
-        }).then((res)=>{
-            console.log("Saved")
-        });
+        let data = this.props.data
+        let folderI = data.folders.findIndex(this.findFolder)
+        let noteI = data.folders[folderI].contents.findIndex(this.findNote)
+
+        data.folders[folderI].contents[noteI].content= this.state.editorContent
+
+        this.props.updateData(data)
+    }
+    findFolder(a){
+        return a === this.props.folder
+    }
+    findNote(a){
+        return a === this.props.note
     }
 
     render() {
 
         return ( 
-            <div className = { style.noteEdit } >
-                {this.state.editorState !== null ?
-                    <textarea className={style.noteArea} placeholder="Start Typing!" onChange={this.onChange}>{this.state.content}</textarea>
+            <div className={ style.noteEdit }>
+                {this.props.folder !== null ?
+                    this.props.note !== null ?
+                        <textarea id="noteEditor" className={style.noteArea} placeholder="Start Typing!" onChange={this.onChange}>{this.state.content}</textarea>
+                    :
+                        <p>Select a Note to Edit</p>
                 :
-                    <p>Select a Note to Edit</p>
-            }
+                <React.Fragment/>
+                }
             </div>
         )
     }

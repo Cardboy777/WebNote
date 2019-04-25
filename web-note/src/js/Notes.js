@@ -15,10 +15,12 @@ export default class Notes extends Component {
   }
 
   setFolder(folder){
-    this.setState({
-      selectedFolder : folder,
-      selectedNote: null
-    })
+    if(this.state.selectedFolder !== folder){
+      this.setState({
+        selectedFolder : folder,
+        selectedNote: null
+      })
+    }
   }
   setNote(note){
     this.setState({

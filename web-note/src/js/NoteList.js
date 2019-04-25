@@ -9,43 +9,38 @@ export default class NoteList extends Component {
   constructor(props){
     super(props);
     this.addNewNote = this.addNewNote.bind(this)
+    this.findFolder = this.findFolder.bind(this)
   }
   
   isFolderSelected(){
     return !(this.props.folder === null)
   }
 
+  //adds new note object and updates database
   addNewNote(){
-    let db = firebase.firestore();
-        let currentTime = new Date();
+    let data = this.props.data
+    let currentTime = new Date();
 
-        let name = currentTime.toUTCString();
-        let tCreated = currentTime.getTime();
-        let tModified = tCreated;
-        let content = "";
+    let name = currentTime.toUTCString();
+    let tCreated = currentTime.getTime();
+    let tModified = tCreated;
+    let content = "";
 
-        let newNote={
-            name: name,
-            content: content,
-            timeCreated: tCreated,
-            lastModified: tModified
-        }
+    let newNote={
+        name: name,
+        content: content,
+        timeCreated: tCreated,
+        lastModified: tModified,
+        createdBy: this.props.user.uid,
+        visibleBy: this.props.user.uid
+    }
+    let folderI= data.folders.findIndex(this.findFolder)
+    data.folders[folderI].contents.push(newNote);
+    this.props.updateData(data)
+  }
 
-        let folderUnion={
-          contents : [newNote],
-          name: this.props.folder.name
-        }
-
-        db.collection("userData").doc(this.props.user.uid).update(
-            {
-                folders : firebase.firestore.FieldValue.arrayUnion(folderUnion)
-            }
-        )
-        .then((res)=>{
-            console.log('Note Created')
-        }).catch((err)=>{
-            console.log('Error')
-        })
+  findFolder(a){
+    return a === this.props.folder
   }
 
   render() {
@@ -54,7 +49,7 @@ export default class NoteList extends Component {
         {this.isFolderSelected() ?
           <React.Fragment>
             {this.props.folder.contents.map((i) =>
-                <NoteButton data={i} setNote={this.props.setNote}/>
+                <NoteButton key={i.name} data={i} setNote={this.props.setNote}/>
             )}
             <div className={buttonStyle.panel} onClick={this.addNewNote}>
               Add Note +

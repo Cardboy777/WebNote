@@ -1,6 +1,32 @@
 .panel{
     height: 6rem;
     width: 100%;
+    max-width: 100%;
     background-color: white;
-    color: black
+    color: black;
+    overflow: hidden;
+    border: 1px rgb(206, 206, 206) solid;
+    transition: 0.4s;
+
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.panel:hover{
+    background-color: rgb(231, 231, 231);
+}
+
+.panel:active{
+    background-color: white;
+    transition: 0s;
+}
+.noteName{
+    font-size: 1rem;
+    font-weight: 1000;
+}
+.noteData{
+    font-size: 1.2rem;
 }

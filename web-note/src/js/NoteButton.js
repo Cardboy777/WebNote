@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import style from '../css/NoteButton.module.css'
 
 export default class NoteButton extends Component {
+  constructor(props){
+    super(props)
+    this.setNote=this.setNote.bind(this)
+  }
 
   setNote(){
     this.props.setNote(this.props.data)
@@ -10,7 +14,8 @@ export default class NoteButton extends Component {
   render() {
     return (
       <div className={style.panel} onClick={this.setNote}>
-        {this.props.data.name}{this.props.data.content}{this.props.data.lastModified}{this.props.data.timeCreated}
+        <h1 className={style.noteName}>{this.props.data.name}</h1>
+        <p className={style.noteData}>{this.props.data.content}</p>
       </div>
     )
   }
