@@ -18,6 +18,8 @@ export default class Notes extends Component {
     this.downloadNote = this.downloadNote.bind(this)
     this.downloadFolder = this.downloadFolder.bind(this)
     this.createDownloadableNote = this.createDownloadableNote.bind(this)
+    this.renameFolder = this.renameFolder.bind(this)
+    this.renameNote = this.renameNote.bind(this)
   }
 
   setFolder(folder){
@@ -32,6 +34,38 @@ export default class Notes extends Component {
     this.setState({
       selectedNote : note
     })
+  }
+
+  renameFolder(newFolderName){
+    let data = this.props.data;
+
+    let i =data.folders.findIndex((e)=>{
+      return e === this.state.selectedFolder
+    })
+
+    data.folders[i].name = newFolderName;
+    this.setState({
+      selectedFolder: data.folders[i]
+    })
+
+    this.props.updateData(data)
+  }
+
+  renameNote(newNoteName){
+    let data = this.props.data;
+
+    let i =data.folders.findIndex((e)=>{
+      return e === this.state.selectedFolder
+    })
+    let ni=data.folders[i].contents.findIndex((e)=>{
+      return e === this.state.selectedNote
+    })
+
+    data.folders[i].contents[ni].name = newNoteName;
+    this.setState({
+      selectedNote: data.folders[i].contents[ni]
+    })
+    this.props.updateData(data)
   }
 
   downloadNote(){
@@ -71,7 +105,7 @@ export default class Notes extends Component {
     
     return (
       <div style={wrapperDiv}>
-        <LeftMenu downloadFolder={this.downloadFolder} downloadNote={this.downloadNote} />
+        <LeftMenu renameFolder={this.renameFolder} renameNote={this.renameNote}  downloadFolder={this.downloadFolder} downloadNote={this.downloadNote} folder={this.state.selectedFolder} note={this.state.selectedNote}/>
         <FolderList {...this.props} setFolder={this.setFolder} folder={this.state.selectedFolder}/>
         <NoteList {...this.props} folder={this.state.selectedFolder} setNote={this.setNote}/>
         {this.state.selectedNote !== null ?
