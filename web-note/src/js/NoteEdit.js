@@ -23,6 +23,12 @@ export default class NoteEdit extends Component {
             document.getElementById('noteEditor').value = this.props.note.content
         }
     }
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.note.content!==prevState.editorContent){
+          return { editorContent: nextProps.note.content};
+       }
+       else return null;
+    }
 
     onChange(e){
         this.setState({

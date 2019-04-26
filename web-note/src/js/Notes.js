@@ -31,9 +31,17 @@ export default class Notes extends Component {
     }
   }
   setNote(note){
-    this.setState({
-      selectedNote : note
-    })
+    if(this.state.selectedNote !== note){
+      this.setState({
+        selectedNote : null
+      })
+      //wait for react to re-render and then set the new note (workaround for selected note's contents not being displayed)
+      setTimeout(()=>{
+        this.setState({
+          selectedNote : note
+        })
+    }, 1);
+    }
   }
 
   renameFolder(newFolderName){
@@ -44,6 +52,7 @@ export default class Notes extends Component {
     })
 
     data.folders[i].name = newFolderName;
+
     this.setState({
       selectedFolder: data.folders[i]
     })
@@ -107,7 +116,7 @@ export default class Notes extends Component {
       <div style={wrapperDiv}>
         <LeftMenu renameFolder={this.renameFolder} renameNote={this.renameNote}  downloadFolder={this.downloadFolder} downloadNote={this.downloadNote} folder={this.state.selectedFolder} note={this.state.selectedNote}/>
         <FolderList {...this.props} setFolder={this.setFolder} folder={this.state.selectedFolder}/>
-        <NoteList {...this.props} folder={this.state.selectedFolder} setNote={this.setNote}/>
+        <NoteList {...this.props} folder={this.state.selectedFolder} setNote={this.setNote} note={this.state.selectedNote}/>
         {this.state.selectedNote !== null ?
           <NoteEdit {...this.props} folder={this.state.selectedFolder} note={this.state.selectedNote} downloadNote={this.downloadNote}/>
           :

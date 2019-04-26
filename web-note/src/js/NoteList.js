@@ -37,7 +37,6 @@ export default class NoteList extends Component {
     data.folders[folderI].contents.push(newNote);
     this.props.updateData(data)
   }
-
   findFolder(a){
     return a === this.props.folder
   }
@@ -48,7 +47,7 @@ export default class NoteList extends Component {
         {this.isFolderSelected() ?
           <React.Fragment>
             {this.props.folder.contents.map((i) =>
-                <NoteButton key={i.name} data={i} setNote={this.props.setNote}/>
+                <NoteButton key={i.name} data={i} setNote={this.props.setNote} isSelected={this.props.note === i}/>
             )}
             <div className={buttonStyle.panel} onClick={this.addNewNote}>
               Add Note +

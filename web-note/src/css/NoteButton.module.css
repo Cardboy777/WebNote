@@ -34,3 +34,29 @@
     margin: 0;
     padding:0
 }
+
+.panelSelected{
+    height: 6rem;
+    width: 100%;
+    max-width: 100%;
+    background-color: rgb(196, 207, 255);
+    color: black;
+    overflow: hidden;
+    border: 1px rgb(206, 206, 206) solid;
+    transition: 0.4s;
+
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.panelSelected:hover{
+    background-color: rgb(158, 165, 255);
+}
+
+.panelSelected:active{
+    background-color: rgb(132, 144, 255);
+    transition: 0s;
+}

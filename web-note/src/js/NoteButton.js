@@ -13,10 +13,16 @@ export default class NoteButton extends Component {
 
   render() {
     return (
-      <div className={style.panel} onClick={this.setNote}>
-        <h1 className={style.noteName}>{this.props.data.name}</h1>
-        <p className={style.noteData}>{this.props.data.content}</p>
-      </div>
-    )
+      this.props.isSelected ?
+        <div className={style.panelSelected} onClick={this.setNote}>
+          <h1 className={style.noteName}>{this.props.data.name}</h1>
+          <p className={style.noteData}>{this.props.data.content}</p>
+        </div>
+      :
+        <div className={style.panel} onClick={this.setNote}>
+          <h1 className={style.noteName}>{this.props.data.name}</h1>
+          <p className={style.noteData}>{this.props.data.content}</p>
+        </div>
+      )
   }
 }
