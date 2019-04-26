@@ -16,6 +16,7 @@ class WebNote extends Component {
       isAuthenticating: true,
       updateData: this.updateData
     }
+    this.setData= this.setData.bind(this)
   }
 
   //Starts the process of authenticating the current user (checking if a user is logged in)
@@ -52,6 +53,19 @@ class WebNote extends Component {
     db.collection("userData").doc(this.state.uAuth.uid).update({
           folders: data.folders
     }).then((res)=>{
+    }).catch((err)=>{
+    })
+  }
+  setData(data, uAuth){
+    console.log('HERE')
+    let db= firebase.firestore()
+    localStorage.setItem('uData', data);
+
+    this.setState({
+      uData : data
+    })
+
+    db.collection("userData").doc(uAuth.uid).set(data).then((res)=>{
     }).catch((err)=>{
     })
   }
@@ -99,7 +113,7 @@ class WebNote extends Component {
             folders : [],
             uid : user.uid
           }
-          this.updateData(newData)
+          this.setData(newData, user)
           this.setState({
             uAuth : user,
             isAuthenticating: false
