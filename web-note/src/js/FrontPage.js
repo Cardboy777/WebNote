@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
+import style from '../css/FrontPage.module.css'
+import g from '../images/g.png'
 
 export default class FrontPage extends Component {
 
@@ -18,10 +20,20 @@ export default class FrontPage extends Component {
 
   render() {
     return (
-      <div>
-          <h1>This is the Front page</h1>
-          <p>Login you freak</p>
-          <button className='btn btn-primary' onClick={this.handleLoginButton}>Sign-in with Google</button>
+      <div className={style.frontPageDiv}>
+        <div className={style.contents}>
+          <h1 className={style.title}>WebNote</h1>
+          <p className={style.summary}>WebNote is a site for quickly and easily taking notes. Creating new Files and Folder is easier than ever. Disconnecting for a while? No worries! Simply download your notes for offline viewing.</p>
+          <br/>
+          <p className={style.loginPrompt}>Get Started by logging in via a Google Account:</p>
+          <div className={style.loginButtonDiv}>
+            <button className={style.loginButton} onClick={this.handleLoginButton}>Sign-in with <img className={style.imgG} src={g}/></button>
+          </div>
+        </div>
+
+        <br/>
+        <p className={style.credit}>WebNote was created by Reid Kippenbrock</p>
+        
       </div>
     )
   }
