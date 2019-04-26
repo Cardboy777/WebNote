@@ -52,9 +52,7 @@ class WebNote extends Component {
     db.collection("userData").doc(this.state.uAuth.uid).update({
           folders: data.folders
     }).then((res)=>{
-        console.log('Firebase Updated')
     }).catch((err)=>{
-        console.log('Firebase Error')
     })
   }
 
