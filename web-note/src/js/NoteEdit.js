@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import style from '../css/NoteEdit.module.css';
-import firebase from './firebase';
 
 export default class NoteEdit extends Component {
     constructor(props){
         super(props);
         this.state = {
             editorContent: null,
-            lastKeyPressTime: Date.now()
+            lastKeyPressTime: Date.now(),
+            currentNote : this.props.note
         }
         this.onChange = this.onChange.bind(this)
         this.saveChanges = this.saveChanges.bind(this)
@@ -16,7 +16,6 @@ export default class NoteEdit extends Component {
     }
 
     componentDidMount(){
-        console.log('Here')
         if(this.props.note !== null){
             this.setState({
                 editorContent: this.props.note.content
@@ -58,6 +57,7 @@ export default class NoteEdit extends Component {
         return ( 
             <div className={ style.noteEdit }>
                 <textarea id="noteEditor" className={style.noteArea} placeholder="Start Typing!" onChange={this.onChange}/>
+                <div className={style.downLoadNoteButton} onClick={this.props.downloadNote}><i className="fas fa-download"></i></div>
             </div>
         )
     }

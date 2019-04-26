@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import style from '../css/NoteList.module.css'
 import buttonStyle from '../css/NoteButton.module.css'
 import NoteButton from './NoteButton'
-import firebase from './firebase'
 
 export default class NoteList extends Component {
 

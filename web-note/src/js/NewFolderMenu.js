@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import style from '../css/NewFolderMenu.module.css'
-import firebase from './firebase'
 
 export default class NewFolderMenu extends Component {
     constructor(props){

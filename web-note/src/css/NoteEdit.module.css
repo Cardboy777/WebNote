@@ -18,6 +18,34 @@
     line-height: 2.5rem;
 }
 
+.downLoadNoteButton{
+    border-radius: 50%;
+    position: absolute;
+    bottom: 1.8rem;
+    right: 1rem;
+    z-index: 2;
+    padding: 0.3rem;
+    transition: 0.2s;
+    padding: 0 0.6rem 0 0.6rem;
+    color: rgb(82, 82, 82);
+
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.downLoadNoteButton:hover{
+    color: rgb(155, 155, 155);
+}
+.downLoadNoteButton:hover::before{
+    content: "Download Note";
+    font-size: 1rem;
+    vertical-align: center;
+    margin-right: 0.5rem; 
+}
+
 @media only screen and (max-width: 1200px) {
     .noteEdit {
         width: calc(100vw - 6rem - 25%);
